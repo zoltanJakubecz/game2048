@@ -3,37 +3,53 @@ const board = [
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0]
-]
+];
 
 function randomStartCoordinates(){
-    let x = Math.floor(Math.random() * 15) + 1;
-    let y = Math.floor(Math.random() * 15) + 1;
+    let x = Math.floor(Math.random() * 3) + 1;
+    let y = Math.floor(Math.random() * 3) + 1;
     return [x,y];
 }
 
-function starterBoard(){
-    let coordinates = randomStartCoordinates();
-
-    while (coordinates[0] == coordinates[1]){
-        coordinates = randomStartCoordinates();
-    }
-    console.log(coordinates);
+function drawBoard(){
     const cells = document.querySelectorAll('.cell');
-    cells[coordinates[0]].textContent = '16';
-    cells[coordinates[1]].textContent = '4';
+    let arrBoard = board.flat();
+    for(let i=0; i<cells.length; i++){
+        if(arrBoard[i]){
+            cells[i].textContent = arrBoard[i];
+        }
+    }
+
+}
+
+function randomStartNumbers(){
+    return (Math.floor(Math.random() * 100 > 80 ? 4 : 2));
+}
+
+function starterBoard(){
+    const container = document.querySelector('.container');
+
+    for(let row = 0; row < 4; row++){
+        for(let column = 0; column < 4; column++){
+            let newCell = document.createElement('div');
+            newCell.setAttribute('class', 'cell');
+            container.appendChild(newCell);
+        }
+    }
+
+    let coordinates1 = randomStartCoordinates();
+    let coordinates2 = randomStartCoordinates();
+    while(JSON.stringify(coordinates1)==JSON.stringify(coordinates2)){
+        coordinates2 = randomStartCoordinates();
+    }
+    board[coordinates1[0]][coordinates1[1]] = 2;
+    board[coordinates2[0]][coordinates2[1]] = randomStartNumbers();
 
 }
 
 function main() {
-    const container = document.querySelector('.container');
-    for(let row = 0; row < 4; row++){
-        for(let column = 0; column < 4; column++){
-            let newCell = document.createElement('div');
-            newCell.setAttribute('class', 'cell')
-            container.appendChild(newCell)
-        }
-    }
     starterBoard();
+    drawBoard();
     }
 
 main();
