@@ -1,6 +1,10 @@
+body {
+  background: rgba(0,235,255,0.66);
+}
+
 .container {
   height: 500px;
-  margin: 100px auto;
+  margin: 200px auto;
   width: 500px;
 }
 

@@ -1,13 +1,52 @@
-const board = [
+let board = [
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0]
 ];
 
+function moveKeys(event) {
+    let code = event.which || event.keyCode;
+    if(code == '37'){
+        console.log('bal');
+    } else if(code == '38'){
+        console.log('fel');
+    } else if(code == '39'){
+        console.log('jobb');
+    } else if(code == '40'){
+        console.log('le');
+    }
+}
+
+function isGameOver(){
+    // board = [
+    //     [1,2,3,4],
+    //     [5,6,6,8],
+    //     [9,8,4,5],
+    //     [7,4,3,1]
+    // ];
+    for(let i = 0; i < 4; i++){
+        for(let j = 0; j < 4; j++){
+            if(board[i][j] == 2048){
+                return true;
+            }
+            if(!board[i][j]){
+                return false;
+            }
+            if(i < 3 && board[i][j] == board[i+1][j]){
+                return false;
+            }
+            if(j < 3 && board[i][j] == board[i][j+1]){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 function randomStartCoordinates(){
-    let x = Math.floor(Math.random() * 3) + 1;
-    let y = Math.floor(Math.random() * 3) + 1;
+    let x = Math.floor(Math.random() * 4);
+    let y = Math.floor(Math.random() * 4);
     return [x,y];
 }
 
@@ -17,6 +56,8 @@ function drawBoard(){
     for(let i=0; i<cells.length; i++){
         if(arrBoard[i]){
             cells[i].textContent = arrBoard[i];
+        } else {
+            cells[i].textContent = '';
         }
     }
 
@@ -48,8 +89,10 @@ function starterBoard(){
 }
 
 function main() {
+    document.addEventListener('keydown', moveKeys);
     starterBoard();
     drawBoard();
+    console.log(isGameOver());
     }
 
 main();
