@@ -5,9 +5,13 @@ const board = [
     [0,0,0,0]
 ];
 
+function moveNumbers() {
+
+}
+
 function randomStartCoordinates(){
-    let x = Math.floor(Math.random() * 3) + 1;
-    let y = Math.floor(Math.random() * 3) + 1;
+    let x = Math.floor(Math.random() * 4);
+    let y = Math.floor(Math.random() * 4);
     return [x,y];
 }
 
