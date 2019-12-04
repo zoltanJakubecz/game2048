@@ -1,4 +1,4 @@
-.container {
+  .container {
   height: 500px;
   margin: 100px auto;
   width: 500px;
@@ -21,4 +21,10 @@
 
 .active {
   background-color: #e67e22;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden
 }
