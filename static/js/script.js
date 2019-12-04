@@ -1,27 +1,26 @@
-const board = [
+let board = [
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0]
 ]
 
-function randomStartCoordinates(){
-    let x = Math.floor(Math.random() * 15) + 1;
-    let y = Math.floor(Math.random() * 15) + 1;
+function RandomCoordinates() {
+    let x = Math.floor(Math.random() * 4) + 1;
+    let y = Math.floor(Math.random() * 4) + 1;
     return [x,y];
 }
 
-function starterBoard(){
-    let coordinates = randomStartCoordinates();
-
-    while (coordinates[0] == coordinates[1]){
-        coordinates = randomStartCoordinates();
+function starterBoard() {
+    let coordinates1 = RandomCoordinates();
+    let coordinates2 = RandomCoordinates();
+    while(coordinates1 == coordinates2) {
+        coordinates1 = RandomCoordinates();
+        coordinates2 = RandomCoordinates();
     }
-    console.log(coordinates);
     const cells = document.querySelectorAll('.cell');
-    cells[coordinates[0]].textContent = '16';
-    cells[coordinates[1]].textContent = '4';
-
+    cells[coordinates1[0][1]].textContent = '2';
+    cells[coordinates2[0][1]].textContent = '4';
 }
 
 function main() {
@@ -34,6 +33,6 @@ function main() {
         }
     }
     starterBoard();
-    }
+}
 
 main();
