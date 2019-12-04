@@ -6,7 +6,7 @@ const board = [
 ];
 
 function moveNumbers() {
-
+ return;
 }
 
 function randomStartCoordinates(){
