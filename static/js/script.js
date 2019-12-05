@@ -151,6 +151,10 @@ function catchMove(event) {
         mergedBoard = mergeNumbers('right', board);
         finishedBoard = organizeNumbers('right', mergedBoard);
     }
+    randomPosition();
+    if(isGameOver()) {
+        alert('Game OVer');
+    }
     drawBoard();
 }
 
@@ -205,7 +209,7 @@ function starterBoard(){
     while(JSON.stringify(coordinates1)==JSON.stringify(coordinates2)){
         coordinates2 = randomStartCoordinates();
     }
-    board[coordinates1[0]][coordinates1[1]] = 2048;
+    board[coordinates1[0]][coordinates1[1]] = 2;
     board[coordinates2[0]][coordinates2[1]] = randomStartNumbers();
 
 }
@@ -214,17 +218,16 @@ function main() {
     document.addEventListener('keydown', catchMove);
     starterBoard();
     drawBoard();
-    console.log(isGameOver());
     }
 
 main();
 
 //FOR DEBUG
-board = [
-    [0,4,2,4],
-    [0,2,2,2],
-    [0,8,0,8],
-    [8,4,4,8]
-];
-drawBoard();
+//board = [
+//    [0,4,2,4],
+//    [0,2,2,2],
+//    [0,8,0,8],
+//    [8,4,4,8]
+//];
+//drawBoard();
 //FOR DEBUG
