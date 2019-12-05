@@ -58,3 +58,9 @@ h1 {
   padding-top: 35px;
   font-size: 48px;
 }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
