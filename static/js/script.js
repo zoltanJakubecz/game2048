@@ -56,12 +56,31 @@ function mergeNumbers(given_board) {
 }
 
 function organizeNumbers(direction, boardToProcess) {
-    if(direction == 'left') {
+    if (direction == 'left') {
         let row;
-        for(row of boardToProcess) {
-            //TODO: FINISH REMOVING 0
+        for (row of boardToProcess) {
+            //Skip equal rows
+            if (!(row.every((val, i, arr) => val === arr[0]))) {
+                for (let pos = 0; pos < 4; pos++) {
+                    if (row[pos] !== 0) {
+                        continue;
+                    }
+                    for (let runs = 0; runs < 4; runs++) {
+                        let nextColumn = pos + 1;
+                        if (nextColumn < 4) {
+                            if (row[nextColumn] !== 0) {
+                                row[pos] = row[nextColumn];
+                                row[nextColumn] = 0;
+                            } else {
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
+    return boardToProcess;
 }
 
 function catchMove(event) {
@@ -80,17 +99,30 @@ function catchMove(event) {
         board = [
             [0,4,2,4],
             [0,2,0,2],
-            [2,0,0,0],
+            [0,8,0,8],
             [8,4,4,8]
         ];
+
+        //FOR DEBUG
+        console.log(board);
+        drawBoard();
+        //FOR DEBUG
+
         mergedBoard = mergeNumbers(board);
+
+        //FOR DEBUG
+        console.log(mergedBoard);
+        //organizeNumbers('left', mergedBoard);
+        //FOR DEBUG
+
         finishedBoard = organizeNumbers('left', mergedBoard);
+        console.log(finishedBoard);
     }
     else if (code == '39') {
        // Right
 
     }
-    board = finishedBoard;
+  //  board = finishedBoard;
     drawBoard();
 }
 
