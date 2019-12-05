@@ -51,6 +51,8 @@ function randomPosition(){
     let coordinates = possiblePosition[Math.floor(Math.random() * possiblePosition.length)];
     console.log(coordinates);
     board[coordinates[0]][coordinates[1]] = randomStartNumbers();
+    drawBoard();
+}
 
 let shiftedboard = [
     [0,0,0,0],
