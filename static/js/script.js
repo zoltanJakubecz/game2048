@@ -9,6 +9,7 @@ function moveKeys(event) {
     let code = event.which || event.keyCode;
     if(code == '37'){
         console.log('bal');
+        randomPosition();
     } else if(code == '38'){
         console.log('fel');
     } else if(code == '39'){
@@ -44,6 +45,29 @@ function isGameOver(){
     return true;
 }
 
+
+function randomPosition(){
+    // board = [
+    //     [0,2,3,0],
+    //     [5,6,0,8],
+    //     [9,8,0,5],
+    //     [7,4,3,0]
+    // ];
+    let possiblePosition = [];
+    for(let i = 0; i < 4; i++){
+        for(let j = 0; j < 4; j++){
+            if(board[i][j] == 0){
+                possiblePosition.push([i,j]);
+            }
+        }
+    }
+    console.log(possiblePosition);
+    let coordinates = possiblePosition[Math.floor(Math.random() * possiblePosition.length)];
+    console.log(coordinates);
+    board[coordinates[0]][coordinates[1]] = randomStartNumbers();
+    drawBoard();
+}
+
 function randomStartCoordinates(){
     let x = Math.floor(Math.random() * 4);
     let y = Math.floor(Math.random() * 4);
@@ -55,9 +79,21 @@ function drawBoard(){
     let arrBoard = board.flat();
     for(let i=0; i<cells.length; i++){
         if(arrBoard[i]){
+            if(arrBoard[i] / 100 >= 1){
+                if(arrBoard[i] / 1000 >= 1){
+                    cells[i].classList.add('four-digit-size');
+                } else {
+                    cells[i].classList.add('three-digit-size');
+                }
+            } else {
+                cells[i].classList.remove('three-digit-size');
+                cells[i].classList.remove('four-digit-size');
+            }
             cells[i].textContent = arrBoard[i];
+            cells[i].classList.add('number');
         } else {
             cells[i].textContent = '';
+            cells[i].classList.remove(('number'));
         }
     }
 
@@ -68,7 +104,7 @@ function randomStartNumbers(){
 }
 
 function starterBoard(){
-    const container = document.querySelector('.container');
+    const container = document.querySelector('.game-container');
 
     for(let row = 0; row < 4; row++){
         for(let column = 0; column < 4; column++){
@@ -83,7 +119,7 @@ function starterBoard(){
     while(JSON.stringify(coordinates1)==JSON.stringify(coordinates2)){
         coordinates2 = randomStartCoordinates();
     }
-    board[coordinates1[0]][coordinates1[1]] = 2;
+    board[coordinates1[0]][coordinates1[1]] = 2048;
     board[coordinates2[0]][coordinates2[1]] = randomStartNumbers();
 
 }
